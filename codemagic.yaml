@@ -1,0 +1,24 @@
+workflows:
+  android-debug:
+    name: B&E Messenger Android Debug
+    max_build_duration: 30
+    environment:
+      java: 17
+    scripts:
+      - name: Build debug APK
+        script: |
+          if [ -f ./gradlew ]; then chmod +x gradlew; ./gradlew assembleDebug; else gradle assembleDebug; fi
+    artifacts:
+      - app/build/outputs/apk/debug/app-debug.apk
+
+  android-release:
+    name: B&E Messenger Android Release
+    max_build_duration: 30
+    environment:
+      java: 17
+    scripts:
+      - name: Build release APK
+        script: |
+          if [ -f ./gradlew ]; then chmod +x gradlew; ./gradlew assembleRelease; else gradle assembleRelease; fi
+    artifacts:
+      - app/build/outputs/apk/release/app-release-unsigned.apk
